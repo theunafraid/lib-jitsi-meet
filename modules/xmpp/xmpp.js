@@ -215,10 +215,10 @@ export default class XMPP extends Listenable {
 
                     if (this.speakerStatsComponentAddress
                         || this.conferenceDurationComponentAddress) {
-                            this.connection.addHandler(
-                                this._onPrivateMessage.bind(this), null,
-                                'message', null, null);        
-                        }
+                        this.connection.addHandler(
+                            this._onPrivateMessage.bind(this), null,
+                            'message', null, null);
+                    }
                 })
                 .catch(error => {
                     const errmsg = 'Feature discovery error';
@@ -728,8 +728,8 @@ export default class XMPP extends Listenable {
     _onPrivateMessage(msg) {
         const from = msg.getAttribute('from');
 
-        if ( !( (from === this.speakerStatsComponentAddress)
-            || (from === this.conferenceDurationComponentAddress) ) ) {
+        if (!((from === this.speakerStatsComponentAddress)
+            || (from === this.conferenceDurationComponentAddress))) {
             return;
         }
 
