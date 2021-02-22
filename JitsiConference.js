@@ -27,6 +27,9 @@ import P2PDominantSpeakerDetection from './modules/detection/P2PDominantSpeakerD
 import VADAudioAnalyser from './modules/detection/VADAudioAnalyser';
 import VADNoiseDetection from './modules/detection/VADNoiseDetection';
 import VADTalkMutedDetection from './modules/detection/VADTalkMutedDetection';
+
+import AudioFeedbackAnalyser from './modules/detection/AudioFeedbackAnalyser';
+
 import { E2EEncryption } from './modules/e2ee/E2EEncryption';
 import E2ePing from './modules/e2eping/e2eping';
 import Jvb121EventGenerator from './modules/event/Jvb121EventGenerator';
@@ -485,6 +488,18 @@ JitsiConference.prototype._init = function(options = {}) {
             this.eventEmitter.emit(JitsiConferenceEvents.AUDIO_INPUT_STATE_CHANGE, hasAudioSignal);
         });
     }
+
+    //if (config.enableAudiofeedbackDetection) {
+        if (config.createAudiofeedback) {
+            this._audiofeedbackAnalyser = new AudioFeedbackAnalyser(this, config.createAudiofeedback);
+
+            logger.info("audiofeedback initialized!!!");
+        } else {
+
+        }
+    //} else {
+    //    logger.info("AUDIOFEEDBACK NOT CONFIGURED!");
+    //}
 
 
     if ('channelLastN' in config) {
